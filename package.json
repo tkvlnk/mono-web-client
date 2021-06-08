@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@blueprintjs/core": "^3.45.0",
+    "@blueprintjs/datetime": "^3.23.4",
+    "@blueprintjs/table": "^3.8.33",
     "@craco/craco": "^6.1.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -11,9 +14,16 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.16.1",
     "react-scripts": "4.0.3",
+    "sass": "^1.34.1",
+    "ts-node": "^10.0.0",
+    "typed-css-modules": "^0.7.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.3",
@@ -41,7 +51,9 @@
     "lint:style": "stylelint --custom-formatter=node_modules/stylelint-formatter-pretty \"src/**/*.{css,scss}\"",
     "lint:style:fix": "yarn run lint:style --fix",
     "precommit": "yarn run typecheck && lint-staged",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "codegen": "npm run codegen:css-module-types",
+    "codegen:css-module-types": "tcm -p 'src/**/*.module.{css,scss}'"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run precommit"
