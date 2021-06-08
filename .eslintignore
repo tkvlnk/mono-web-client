@@ -1,0 +1,8 @@
+node_modules
+__generated__
+
+# CRA
+src/reportWebVitals.ts
+src/service-worker.ts
+src/serviceWorkerRegistration.ts
+src/react-app-env.d.ts
