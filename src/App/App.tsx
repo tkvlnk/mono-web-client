@@ -7,6 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+import mccRanges from '../mcc-ranges.json';
+
 import s from './s.module.scss';
 
 const http = axios.create({
@@ -201,6 +203,17 @@ function App() {
                 {dayjs(statements[rowIndex].time * 1000).format(
                   'HH:mm, D MMM YYYY'
                 )}
+              </Cell>
+            )}
+          />
+          <Column
+            name="Тип"
+            cellRenderer={(rowIndex) => (
+              <Cell>
+                <span style={{ fontSize: '2em' }}>
+                  {mccRanges.find(({ max }) => max >= statements[rowIndex].mcc)
+                    ?.emoji ?? '❓'}
+                </span>
               </Cell>
             )}
           />

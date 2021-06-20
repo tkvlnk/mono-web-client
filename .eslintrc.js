@@ -17,13 +17,6 @@ module.exports = {
       globals: {
         fetchMock: 'readonly'
       }
-    },
-    {
-      files: ['*.stories.{ts,tsx}'],
-      rules: {
-        'import/no-extraneous-dependencies': 0,
-        'import/no-anonymous-default-export': 0
-      }
     }
   ],
   rules: {

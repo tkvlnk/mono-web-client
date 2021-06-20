@@ -1,0 +1,97 @@
+[
+  {
+    "max": 699,
+    "description": "Reserved",
+    "emoji": "🔒"
+  },
+  {
+    "max": 999,
+    "description": "Agricultural services",
+    "emoji": "🌾"
+  },
+  {
+    "max": 1499,
+    "description": "Reserved",
+    "emoji": "🔒"
+  },
+  {
+    "max": 2999,
+    "description": "Contracted services",
+    "emoji": "📝"
+  },
+  {
+    "max": 3999,
+    "description": "Reserved for private use",
+    "emoji": "🔒"
+  },
+  {
+    "max": 4799,
+    "description": "Transportation",
+    "emoji": "🚛"
+  },
+  {
+    "max": 4999,
+    "description": "Utilities",
+    "emoji": "💸"
+  },
+  {
+    "max": 5499,
+    "description": "Retail outlets",
+    "emoji": "🛒"
+  },
+  {
+    "max": 5599,
+    "description": "Automobiles and vehicles",
+    "emoji": "🚘"
+  },
+  {
+    "max": 5699,
+    "description": "Clothing outlets",
+    "emoji": "👕"
+  },
+  {
+    "max": 5999,
+    "description": "Miscellaneous outlets",
+    "emoji": "🍔"
+  },
+  {
+    "max": 7299,
+    "description": "Service providers",
+    "emoji": "🧹"
+  },
+  {
+    "max": 7529,
+    "description": "Business services",
+    "emoji": "💼"
+  },
+  {
+    "max": 7799,
+    "description": "Repair services",
+    "emoji": "🛠"
+  },
+  {
+    "max": 7999,
+    "description": "Amusement and entertainment",
+    "emoji": "🎪"
+  },
+  {
+    "max": 8999,
+    "description": "Professional services and membership organizations",
+    "emoji": "👷"
+  },
+  {
+    "max": 9199,
+    "description": "Reserved for ISO use",
+    "emoji": "🔒"
+  },
+  {
+    "max": 9402,
+    "description": "Government services",
+    "emoji": "🏛"
+  },
+  {
+    "max": 9999,
+    "description": "Reserved",
+    "emoji": "🔒"
+  }
+]

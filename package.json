@@ -45,7 +45,7 @@
     "test": "craco test",
     "eject": "craco eject",
     "lint": "yarn run lint:style && yarn run lint:code",
-    "lint:code": "eslint --format friendly \"**/*.{ts,tsx}\" --max-warnings 0",
+    "lint:code": "eslint \"**/*.{ts,tsx,js}\" --max-warnings 0",
     "lint:code:fix": "yarn run lint:code --fix",
     "lint:fix": "yarn run lint:style:fix && yarn run lint:code:fix",
     "lint:style": "stylelint --custom-formatter=node_modules/stylelint-formatter-pretty \"src/**/*.{css,scss}\"",
