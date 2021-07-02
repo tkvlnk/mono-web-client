@@ -1,0 +1,116 @@
+[
+  {
+    "max": 699,
+    "name": "Зарезирвировано",
+    "nameEn": "Reserved",
+    "emoji": "🔒"
+  },
+  {
+    "max": 999,
+    "name": "Сельскохозяйственные услуги",
+    "nameEn": "Agricultural services",
+    "emoji": "🌾"
+  },
+  {
+    "max": 1499,
+    "name": "Зарезирвировано",
+    "nameEn": "Reserved",
+    "emoji": "🔒"
+  },
+  {
+    "max": 2999,
+    "name": "Услуги по контракту",
+    "nameEn": "Contracted services",
+    "emoji": "📝"
+  },
+  {
+    "max": 3999,
+    "name": "Зарезирвировано для частного использования",
+    "nameEn": "Reserved for private use",
+    "emoji": "🔒"
+  },
+  {
+    "max": 4799,
+    "name": "Транспортировка",
+    "nameEn": "Transportation",
+    "emoji": "🚛"
+  },
+  {
+    "max": 4999,
+    "name": "Перводы",
+    "nameEn": "Utilities",
+    "emoji": "💸"
+  },
+  {
+    "max": 5499,
+    "name": "Розничная торговля",
+    "nameEn": "Retail outlets",
+    "emoji": "🛒"
+  },
+  {
+    "max": 5599,
+    "name": "Автомобили и средства передвижения",
+    "nameEn": "Automobiles and vehicles",
+    "emoji": "🚘"
+  },
+  {
+    "max": 5699,
+    "name": "Магазины одежды",
+    "nameEn": "Clothing outlets",
+    "emoji": "👕"
+  },
+  {
+    "max": 5999,
+    "name": "Различные торговые точки",
+    "nameEn": "Miscellaneous outlets",
+    "emoji": "🤲"
+  },
+  {
+    "max": 7299,
+    "name": "Поставщики услуг",
+    "nameEn": "Service providers",
+    "emoji": "🧹"
+  },
+  {
+    "max": 7529,
+    "name": "Бизнес-услуги",
+    "nameEn": "Business services",
+    "emoji": "💼"
+  },
+  {
+    "max": 7799,
+    "name": "Услуги по ремонту",
+    "nameEn": "Repair services",
+    "emoji": "🛠"
+  },
+  {
+    "max": 7999,
+    "name": "Развлечения",
+    "nameEn": "Amusement and entertainment",
+    "emoji": "🎪"
+  },
+  {
+    "max": 8999,
+    "name": "Профессиональные услуги и членские организации",
+    "nameEn": "Professional services and membership organizations",
+    "emoji": "👷"
+  },
+  {
+    "max": 9199,
+    "name": "Зарезервировано для использования ISO",
+    "nameEn": "Reserved for ISO use",
+    "emoji": "🔒"
+  },
+  {
+    "max": 9402,
+    "name": "Государственные услуги",
+    "nameEn": "Government services",
+    "emoji": "🏛"
+  },
+  {
+    "max": 9999,
+    "name": "Зарезирвировано",
+    "nameEn": "Reserved",
+    "emoji": "🔒"
+  }
+]

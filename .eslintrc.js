@@ -20,6 +20,7 @@ module.exports = {
     }
   ],
   rules: {
-    '@typescript-eslint/naming-convention': 0
+    '@typescript-eslint/naming-convention': 0,
+    'no-void': [2, { allowAsStatement: true }]
   }
 };

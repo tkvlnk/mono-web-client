@@ -3914,6 +3914,11 @@ constants-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
 
+constate@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/constate/-/constate-3.3.0.tgz#3961f552ab1bec2a9d0d56c9bc1d6bcde407357b"
+  integrity sha512-mRjWH2J4D3Rq6XAuEhoGUkBWrBLUNbiYr/Rp4M/MEEp+LN0vctQS3EAw/6bxlnDy59T+UrAEU9Tg136Dfp6ytg==
+
 content-disposition@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.3.tgz#e130caf7e7279087c5616c2007d0485698984fbd"
@@ -6349,6 +6354,11 @@ icss-utils@^4.0.0, icss-utils@^4.1.1:
   integrity sha512-4aFq7wvWyMHKgxsH8QQtGpvbASCf+eM3wPRLI6R+MgAnTCZ6STYsRvttLvRWK0Nfif5piF394St3HeJDaljGPA==
   dependencies:
     postcss "^7.0.14"
+
+idb@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/idb/-/idb-6.1.2.tgz#82ef5c951b8e1f47875d36ccafa4bedafc62f2f1"
+  integrity sha512-1DNDVu3yDhAZkFDlJf0t7r+GLZ248F5pTAtA7V0oVG3yjmV125qZOx3g0XpAEkGZVYQiFDAsSOnGet2bhugc3w==
 
 identity-obj-proxy@3.0.0:
   version "3.0.0"
