@@ -7,7 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-import mccRanges from '../mcc-ranges.json';
+import useStore from '../../hooks/useStore';
+import mccRanges from '../../mcc-ranges.json';
 
 import s from './s.module.scss';
 
@@ -80,30 +81,7 @@ function App() {
     window.sessionStorage.setItem('token', token);
   }, [token]);
 
-  const [dateRange, setDateRange] = useState<{
-    start: Date;
-    end: Date;
-  }>(() => {
-    const dateRangeStrs: { start?: string; end?: string } | null = JSON.parse(
-      window.sessionStorage.getItem('date-range') ?? 'null'
-    );
-
-    if (!dateRangeStrs?.start || !dateRangeStrs.end) {
-      return {
-        start: dayjs().startOf('month').toDate(),
-        end: dayjs().startOf('month').add(1, 'month').toDate()
-      };
-    }
-
-    return {
-      start: new Date(dateRangeStrs.start),
-      end: new Date(dateRangeStrs.end)
-    };
-  });
-
-  useEffect(() => {
-    window.sessionStorage.setItem('date-range', JSON.stringify(dateRange));
-  }, [dateRange]);
+  const { dateRange, setDateRange } = useStore();
 
   const { data } = useQuery<UserInfo>(
     'account-info',
@@ -210,7 +188,7 @@ function App() {
             name="Тип"
             cellRenderer={(rowIndex) => (
               <Cell>
-                <span style={{ fontSize: '2em' }}>
+                <span style={{ fontSize: '1.5em' }}>
                   {mccRanges.find(({ max }) => max >= statements[rowIndex].mcc)
                     ?.emoji ?? '❓'}
                 </span>

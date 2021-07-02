@@ -4,16 +4,21 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import App from './App/App';
+import App from './components/App/App';
+import { StoreProvider } from './hooks/useStore';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const queryClient = new QueryClient();
 
+console.log(queryClient.getQueryCache());
+
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
