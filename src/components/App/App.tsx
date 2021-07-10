@@ -1,4 +1,3 @@
-import { Card, Icon, InputGroup } from '@blueprintjs/core';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 
@@ -6,11 +5,12 @@ import { AccountType, CurrencyCode, UserInfo } from '../../apiTypes';
 import { useHttp } from '../../hooks/useHttp';
 import { StatementsDataLayerProvider } from '../../hooks/useStatementsDataLayer';
 
-import StatementsList from '../StatementsList/StatementsList';
+import { Card } from '../Card/Card';
+import { StatementsList } from '../StatementsList/StatementsList';
 
-import s from './s.module.scss';
+import s from './App.module.scss';
 
-function App() {
+export function App() {
   const [token, setToken] = useState(
     () => window.sessionStorage.getItem('token') ?? ''
   );
@@ -35,7 +35,8 @@ function App() {
       enabled: !!token,
       retry: true,
       retryDelay: 2000,
-      cacheTime: Infinity
+      cacheTime: Infinity,
+      staleTime: Infinity
     }
   );
 
@@ -51,25 +52,24 @@ function App() {
     <div className={s.root}>
       <Card>
         <h2>API токен</h2>
-
-        <div>
-          <InputGroup
-            value={token}
-            onChange={(event) => setToken(event.target.value)}
-          />
-        </div>
-
-        <div>
-          <Icon icon="help" /> Это апи токен, который необходим для чтобы
-          получить информацию о счете. Его можно получить на{' '}
+        <input
+          type="text"
+          value={token}
+          onChange={(event) => setToken(event.target.value)}
+        />
+        <i>
+          Это апи токен, который необходим для чтобы получить информацию о
+          счете. Его можно получить на{' '}
           <a href="https://api.monobank.ua" target="_blank" rel="noreferrer">
             здесь
           </a>
           .
-        </div>
+        </i>{' '}
       </Card>
 
-      <h2>{data?.name}</h2>
+      <Card>
+        <h2>{data?.name}</h2>
+      </Card>
 
       {blackCard && (
         <StatementsDataLayerProvider
@@ -84,5 +84,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

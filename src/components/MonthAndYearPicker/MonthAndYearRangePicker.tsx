@@ -3,42 +3,46 @@ import React, { useEffect } from 'react';
 import { Month } from '../../services/StatementsDataLayer';
 
 import type { MonthAndYearRange } from './MonthAndYearPicker';
-import OneMonthAndYearPicker from './OneMonthAndYearPicker';
+import s from './MonthAndYearRangePicker.module.scss';
+import { OneMonthAndYearPicker } from './OneMonthAndYearPicker';
 
 export interface MonthRangePickerProps {
   value: MonthAndYearRange;
   onChange: (value: Required<MonthAndYearRange>) => void;
 }
 
-const MonthAndYearRangePicker: React.FC<MonthRangePickerProps> = ({
+export const MonthAndYearRangePicker: React.FC<MonthRangePickerProps> = ({
   value,
   onChange
 }) => {
-  const valueEnd = value.end ?? {
-    month:
-      value.start.month === Month.December
-        ? Month.January
-        : value.start.month + 1,
-    year:
-      value.start.month === Month.December
-        ? value.start.year + 1
-        : value.start.year
-  };
+  const valueStart = value.end
+    ? value.start
+    : {
+        month:
+          value.start.month === Month.January
+            ? Month.January
+            : value.start.month - 1,
+        year:
+          value.start.month === Month.January
+            ? value.start.year - 1
+            : value.start.year
+      };
+  const valueEnd = value.end ?? value.start;
 
   useEffect(() => {
     onChange({
-      ...value,
+      start: valueStart,
       end: valueEnd
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
-      <div>
-        От
+    <div className={s.root}>
+      <div className={s.from}>
+        <div>От:</div>
         <OneMonthAndYearPicker
-          value={value.start}
+          value={valueStart}
           onChange={(start) =>
             onChange({
               end: valueEnd,
@@ -47,8 +51,8 @@ const MonthAndYearRangePicker: React.FC<MonthRangePickerProps> = ({
           }
         />
       </div>
-      <div>
-        До
+      <div className={s.to}>
+        <div>До:</div>
         <OneMonthAndYearPicker
           value={valueEnd}
           onChange={(end) =>
@@ -62,5 +66,3 @@ const MonthAndYearRangePicker: React.FC<MonthRangePickerProps> = ({
     </div>
   );
 };
-
-export default MonthAndYearRangePicker;

@@ -4,6 +4,7 @@ import { MonthAndYear } from '../../services/StatementsDataLayer';
 
 import MonthPicker from './MonthPicker';
 
+import s from './OneMonthAndYearPicker.module.scss';
 import YearPicker from './YearPicker';
 
 export interface OneMonthPickerProps {
@@ -11,7 +12,7 @@ export interface OneMonthPickerProps {
   onChange: (value: MonthAndYear) => void;
 }
 
-const OneMonthAndYearPicker: React.FC<OneMonthPickerProps> = ({
+export const OneMonthAndYearPicker: React.FC<OneMonthPickerProps> = ({
   value,
   onChange
 }) => {
@@ -21,7 +22,7 @@ const OneMonthAndYearPicker: React.FC<OneMonthPickerProps> = ({
   }, []);
 
   return (
-    <div>
+    <div className={s.root}>
       <YearPicker
         value={value.year}
         onChange={(year) =>
@@ -44,5 +45,3 @@ const OneMonthAndYearPicker: React.FC<OneMonthPickerProps> = ({
     </div>
   );
 };
-
-export default OneMonthAndYearPicker;

@@ -21,6 +21,8 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/naming-convention': 0,
-    'no-void': [2, { allowAsStatement: true }]
+    'no-void': [2, { allowAsStatement: true }],
+    'import/prefer-default-export': 0,
+    'import/no-default-export': 2
   }
 };

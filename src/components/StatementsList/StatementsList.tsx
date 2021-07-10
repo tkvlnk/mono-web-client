@@ -1,13 +1,15 @@
-import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import useStatementsList from '../../hooks/useStatementsList';
-import findVisualsByMcc from '../../mccData/findVisualsByMcc';
-import MonthAndYearPicker, {
+import { useStatementsList } from '../../hooks/useStatementsList';
+import {
+  MonthAndYearPicker,
   MonthAndYearRange
 } from '../MonthAndYearPicker/MonthAndYearPicker';
+import { StatementRow } from '../StatementRow/StatementRow';
 
-const StatementsList = () => {
+import s from './StatementsList.module.scss';
+
+export const StatementsList = () => {
   const [monthYearRange, setMonthYearRange] = useState<MonthAndYearRange>(
     () => {
       const date = new Date();
@@ -23,32 +25,41 @@ const StatementsList = () => {
 
   const { data: statements } = useStatementsList(monthYearRange);
 
+  const sortedStatements = statements
+    ?.concat()
+    .sort((first, second) => first.time - second.time);
+
+  const [selectedStatements, updateStatements] = useState(
+    () => new Set<string>()
+  );
+
   return (
     <div>
-      <div>
-        <MonthAndYearPicker
-          value={monthYearRange}
-          onChange={(nextVal) => {
-            console.log('>__n:::', nextVal);
-            setMonthYearRange(nextVal);
-          }}
-        />
-      </div>
+      <MonthAndYearPicker
+        value={monthYearRange}
+        onChange={useCallback((nextVal) => setMonthYearRange(nextVal), [])}
+      />
 
-      {!!statements?.length &&
-        statements.map((statement) => (
-          <div key={statement.id}>
-            <span>
-              {dayjs(statement.time * 1000).format('HH:mm, D MMM YYYY')}
-            </span>
-            <span>{statement.mcc}</span>
-            <span>{findVisualsByMcc(statement.mcc).emoji}</span>
-            <span>{(statement.amount / 100).toFixed(2)}</span>
-            <div>{statement.description}</div>
-          </div>
-        ))}
+      {!!sortedStatements?.length && (
+        <div className={s.list}>
+          {sortedStatements.map((statement) => (
+            <StatementRow
+              key={statement.id}
+              statement={statement}
+              isSelected={!selectedStatements.has(statement.id)}
+              onSelection={(isSelected) => {
+                if (!isSelected) {
+                  selectedStatements.add(statement.id);
+                } else {
+                  selectedStatements.delete(statement.id);
+                }
+
+                updateStatements(new Set(selectedStatements));
+              }}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
-
-export default StatementsList;

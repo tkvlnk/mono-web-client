@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import { MonthAndYear } from '../../services/StatementsDataLayer';
 
-import MonthAndYearRangePicker from './MonthAndYearRangePicker';
-import OneMonthAndYearPicker from './OneMonthAndYearPicker';
+import { Card } from '../Card/Card';
+
+import s from './MonthAndYearPicker.module.scss';
+import { MonthAndYearRangePicker } from './MonthAndYearRangePicker';
+import { OneMonthAndYearPicker } from './OneMonthAndYearPicker';
 
 export interface MonthAndYearRange {
   start: MonthAndYear;
@@ -15,45 +18,48 @@ export interface MonthAndYearPickerProps {
   onChange: (value: MonthAndYearRange) => void;
 }
 
-const MonthAndYearPicker: React.FC<MonthAndYearPickerProps> = ({
+export const MonthAndYearPicker: React.FC<MonthAndYearPickerProps> = ({
   value,
   onChange
 }) => {
-  const [isRange, setIsRange] = useState(true);
+  const [isChecked, setIsChecked] = useState(true);
+
+  const isOneMonth = !isChecked;
 
   useEffect(() => {
-    if (!isRange) {
+    if (isOneMonth) {
       onChange({
-        ...value,
-        end: undefined
+        start: value.end ?? value.start
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isRange]);
+  }, [isOneMonth, onChange]);
 
   return (
-    <div>
-      <label>
-        Один месяц
-        <input
-          type="checkbox"
-          checked={isRange}
-          onChange={(event) => {
-            setIsRange(event.target.checked);
-          }}
-        />
-      </label>
+    <Card className={s.root}>
+      <h3 style={{ margin: 0 }}>Период</h3>
 
-      {isRange ? (
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={(event) => {
+              setIsChecked(event.target.checked);
+            }}
+          />{' '}
+          Несколько месяцев
+        </label>
+      </div>
+
+      {isOneMonth ? (
         <OneMonthAndYearPicker
           value={value.start}
-          onChange={(start) => onChange({ ...value, start })}
+          onChange={(start) => onChange({ start })}
         />
       ) : (
         <MonthAndYearRangePicker value={value} onChange={onChange} />
       )}
-    </div>
+    </Card>
   );
 };
-
-export default MonthAndYearPicker;

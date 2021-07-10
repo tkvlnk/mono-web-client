@@ -1,36 +1,30 @@
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
+
+import { MonthAndYearRange } from '../components/MonthAndYearPicker/MonthAndYearPicker';
 
 const DATE_RANGE_STORE_ITEM = 'date-range' as const;
 
-export interface DateRange {
-  start: Date;
-  end: Date;
-}
-
-export default function useDateRange(): {
-  dateRange: DateRange;
-  setDateRange: (range: DateRange) => void;
+export function useDateRange(): {
+  dateRange: MonthAndYearRange;
+  setDateRange: (range: MonthAndYearRange) => void;
 } {
-  const [dateRange, setDateRange] = useState<{
-    start: Date;
-    end: Date;
-  }>(() => {
+  const [dateRange, setDateRange] = useState<MonthAndYearRange>(() => {
     const dateRangeStrs = JSON.parse(
       window.sessionStorage.getItem(DATE_RANGE_STORE_ITEM) ?? 'null'
-    ) as { start?: string; end?: string } | null;
+    ) as MonthAndYearRange | null;
 
     if (!dateRangeStrs?.start || !dateRangeStrs.end) {
+      const date = new Date();
+
       return {
-        start: dayjs().startOf('month').toDate(),
-        end: dayjs().startOf('month').add(1, 'month').toDate()
+        start: {
+          year: date.getFullYear(),
+          month: date.getMonth()
+        }
       };
     }
 
-    return {
-      start: new Date(dateRangeStrs.start),
-      end: new Date(dateRangeStrs.end)
-    };
+    return dateRangeStrs;
   });
 
   useEffect(() => {

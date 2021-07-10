@@ -6,7 +6,7 @@ import { MonthAndYearRange } from '../components/MonthAndYearPicker/MonthAndYear
 
 import { useStatementsDataLayer } from './useStatementsDataLayer';
 
-export default function useStatementsList(
+export function useStatementsList(
   monthYear: MonthAndYearRange
 ): UseQueryResult<StatementItem[]> {
   const statementsDataLayer = useStatementsDataLayer();

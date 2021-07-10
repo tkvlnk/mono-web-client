@@ -4,15 +4,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import App from './components/App/App';
+import { App } from './components/App/App';
 import { HttpProvider } from './hooks/useHttp';
 import { StoreProvider } from './hooks/useStore';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const queryClient = new QueryClient();
-
-console.log(queryClient.getQueryCache());
 
 ReactDOM.render(
   <HttpProvider>

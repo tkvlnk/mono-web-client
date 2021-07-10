@@ -2,9 +2,9 @@ import { RenderResult, render } from '@testing-library/react';
 
 import React from 'react';
 
-import App from './App';
+import { App } from './App';
 
-export default class AppDriver {
+export class AppDriver {
   private renderResult!: RenderResult;
 
   when = {

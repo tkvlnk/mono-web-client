@@ -79,7 +79,7 @@ export class StatementsDataLayer {
   ): Promise<StatementItem[]> {
     const promise = this.fetchStatements(monthAndYear);
 
-    if (!retries) {
+    if (retries <= 0) {
       return promise;
     }
 
@@ -88,8 +88,6 @@ export class StatementsDataLayer {
     } catch {
       const retryDelay =
         1.4 ** (this.deps.maxFetchRetries - retries) * 1000 - 1000;
-
-      console.log(retryDelay, retries);
 
       await new Promise((resolve) => setTimeout(resolve, retryDelay));
 
