@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useStatementsList } from '../../hooks/useStatementsList';
 import { useStore } from '../../hooks/useStore/useStore';
@@ -7,17 +7,18 @@ import { StatementRow } from '../StatementRow/StatementRow';
 import s from './StatementsList.module.scss';
 
 export const StatementsList = () => {
-  const { dateRange: monthYearRange } = useStore();
+  const {
+    dateRange,
+    addStatementToBlacklist,
+    removeStatementToBlacklist,
+    isStatementBlacklisted
+  } = useStore();
 
-  const { data: statements } = useStatementsList(monthYearRange);
+  const { data: statements } = useStatementsList(dateRange);
 
   const sortedStatements = statements
     ?.concat()
     .sort((first, second) => first.time - second.time);
-
-  const [selectedStatements, updateStatements] = useState(
-    () => new Set<string>()
-  );
 
   return (
     <div>
@@ -27,15 +28,13 @@ export const StatementsList = () => {
             <StatementRow
               key={statement.id}
               statement={statement}
-              isSelected={!selectedStatements.has(statement.id)}
+              isSelected={!isStatementBlacklisted(statement.id)}
               onSelection={(isSelected) => {
                 if (!isSelected) {
-                  selectedStatements.add(statement.id);
+                  addStatementToBlacklist(statement.id);
                 } else {
-                  selectedStatements.delete(statement.id);
+                  removeStatementToBlacklist(statement.id);
                 }
-
-                updateStatements(new Set(selectedStatements));
               }}
             />
           ))}

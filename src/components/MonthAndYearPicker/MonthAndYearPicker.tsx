@@ -22,7 +22,7 @@ export const MonthAndYearPicker: React.FC<MonthAndYearPickerProps> = ({
   value,
   onChange
 }) => {
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
 
   const isOneMonth = !isChecked;
 

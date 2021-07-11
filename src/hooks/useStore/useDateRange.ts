@@ -4,10 +4,12 @@ import { MonthAndYearRange } from '../../components/MonthAndYearPicker/MonthAndY
 
 const DATE_RANGE_STORE_ITEM = 'date-range' as const;
 
-export function useDateRange(): {
-  dateRange: MonthAndYearRange;
-  setDateRange: (range: MonthAndYearRange) => void;
-} {
+export interface DateRange {
+  readonly dateRange: MonthAndYearRange;
+  setDateRange(range: MonthAndYearRange): void;
+}
+
+export function useDateRange(): DateRange {
   const [dateRange, setDateRange] = useState<MonthAndYearRange>(() => {
     const dateRangeStrs = JSON.parse(
       window.sessionStorage.getItem(DATE_RANGE_STORE_ITEM) ?? 'null'
