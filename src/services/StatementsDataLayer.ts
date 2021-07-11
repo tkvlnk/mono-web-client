@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 
-import { StatementItem } from '../apiTypes';
+import { StatementItem } from '../api/types';
 
 export enum Month {
   January,

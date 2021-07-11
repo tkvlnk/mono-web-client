@@ -37,7 +37,7 @@ export const MonthAndYearPicker: React.FC<MonthAndYearPickerProps> = ({
 
   return (
     <Card className={s.root}>
-      <h3 style={{ margin: 0 }}>Период</h3>
+      <h3>Период</h3>
 
       <div>
         <label>

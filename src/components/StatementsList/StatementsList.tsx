@@ -1,27 +1,13 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { useStatementsList } from '../../hooks/useStatementsList';
-import {
-  MonthAndYearPicker,
-  MonthAndYearRange
-} from '../MonthAndYearPicker/MonthAndYearPicker';
+import { useStore } from '../../hooks/useStore/useStore';
 import { StatementRow } from '../StatementRow/StatementRow';
 
 import s from './StatementsList.module.scss';
 
 export const StatementsList = () => {
-  const [monthYearRange, setMonthYearRange] = useState<MonthAndYearRange>(
-    () => {
-      const date = new Date();
-
-      return {
-        start: {
-          year: date.getFullYear(),
-          month: date.getMonth()
-        }
-      };
-    }
-  );
+  const { dateRange: monthYearRange } = useStore();
 
   const { data: statements } = useStatementsList(monthYearRange);
 
@@ -35,11 +21,6 @@ export const StatementsList = () => {
 
   return (
     <div>
-      <MonthAndYearPicker
-        value={monthYearRange}
-        onChange={useCallback((nextVal) => setMonthYearRange(nextVal), [])}
-      />
-
       {!!sortedStatements?.length && (
         <div className={s.list}>
           {sortedStatements.map((statement) => (

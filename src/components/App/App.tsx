@@ -1,38 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 
-import { AccountType, CurrencyCode, UserInfo } from '../../apiTypes';
+import { CurrenciesKit } from '../../api/CurrenciesKit';
+import { AccountType, CurrencyCode } from '../../api/enums';
+import type { UserInfo } from '../../api/types';
 import { useHttp } from '../../hooks/useHttp';
 import { StatementsDataLayerProvider } from '../../hooks/useStatementsDataLayer';
 
+import { useStore } from '../../hooks/useStore/useStore';
+import { ApiToken } from '../ApiToken/ApiToken';
 import { Card } from '../Card/Card';
+import { MonthAndYearPicker } from '../MonthAndYearPicker/MonthAndYearPicker';
 import { StatementsList } from '../StatementsList/StatementsList';
 
 import s from './App.module.scss';
 
 export function App() {
-  const [token, setToken] = useState(
-    () => window.sessionStorage.getItem('token') ?? ''
-  );
-
-  useEffect(() => {
-    window.sessionStorage.setItem('token', token);
-  }, [token]);
+  const { dateRange, setDateRange, apiToken } = useStore();
 
   const http = useHttp();
 
   const { data } = useQuery<UserInfo>(
     'account-info',
-    () =>
-      http
-        .get('/personal/client-info', {
-          headers: {
-            'X-Token': token
-          }
-        })
-        .then((res) => res.data),
+    () => http.get('/personal/client-info').then((res) => res.data),
     {
-      enabled: !!token,
+      enabled: !!apiToken,
       retry: true,
       retryDelay: 2000,
       cacheTime: Infinity,
@@ -50,36 +42,42 @@ export function App() {
 
   return (
     <div className={s.root}>
-      <Card>
-        <h2>API токен</h2>
-        <input
-          type="text"
-          value={token}
-          onChange={(event) => setToken(event.target.value)}
-        />
-        <i>
-          Это апи токен, который необходим для чтобы получить информацию о
-          счете. Его можно получить на{' '}
-          <a href="https://api.monobank.ua" target="_blank" rel="noreferrer">
-            здесь
-          </a>
-          .
-        </i>{' '}
-      </Card>
+      <header className={s.header} style={{ gridArea: 'head' }}>
+        <ApiToken />
+      </header>
 
-      <Card>
-        <h2>{data?.name}</h2>
-      </Card>
+      {data && (
+        <Card style={{ gridArea: 'userinfo' }}>
+          <h3>{data.name}</h3>
+
+          <label className={s.accountsMenu}>
+            <span>Cчета:</span>
+            <select value={blackCard?.id}>
+              {data.accounts.map((acc) => (
+                <option value={acc.id}>{`${
+                  CurrenciesKit[acc.currencyCode].bankCode
+                } ${acc.type.toUpperCase()} ${acc.maskedPan}`}</option>
+              ))}
+            </select>
+          </label>
+        </Card>
+      )}
+
+      <div style={{ gridArea: 'period' }}>
+        <MonthAndYearPicker value={dateRange} onChange={setDateRange} />
+      </div>
 
       {blackCard && (
-        <StatementsDataLayerProvider
-          accountId={blackCard.id}
-          axios={http}
-          apiToken={token}
-          maxFetchRetries={10}
-        >
-          <StatementsList />
-        </StatementsDataLayerProvider>
+        <div style={{ gridArea: 'list' }}>
+          <StatementsDataLayerProvider
+            accountId={blackCard.id}
+            axios={http}
+            apiToken={apiToken}
+            maxFetchRetries={10}
+          >
+            <StatementsList />
+          </StatementsDataLayerProvider>
+        </div>
       )}
     </div>
   );

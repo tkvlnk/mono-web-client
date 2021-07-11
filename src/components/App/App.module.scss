@@ -1,3 +1,30 @@
 .root {
-  margin: 1em;
+  --content-padding: 1em;
+
+  display: grid;
+
+  grid-template:
+    "head head" auto
+    "period userinfo" auto
+    "list list" auto / 1fr 1fr;
+
+  grid-gap: 2em;
+
+  padding: var(--content-padding);
+}
+
+.header {
+  padding: var(--content-padding);
+  margin: calc(var(--content-padding) * -1);
+
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.accountsMenu {
+  display: grid;
+
+  grid-template-columns: max-content 1fr;
+  grid-gap: 1em;
+
+  align-items: center;
 }

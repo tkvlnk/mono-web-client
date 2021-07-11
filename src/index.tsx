@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { App } from './components/App/App';
 import { HttpProvider } from './hooks/useHttp';
-import { StoreProvider } from './hooks/useStore';
+import { StoreProvider } from './hooks/useStore/useStore';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 

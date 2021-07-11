@@ -3,7 +3,8 @@ import dayjs from 'dayjs';
 import dayJsLocale from 'dayjs/locale/uk';
 import React from 'react';
 
-import { StatementItem } from '../../apiTypes';
+import { CurrenciesKit } from '../../api/CurrenciesKit';
+import { StatementItem } from '../../api/types';
 
 import findVisualsByMcc from '../../mccData/findVisualsByMcc';
 
@@ -33,13 +34,12 @@ export function StatementRow(props: StatementRowProps) {
         [s._income]: statement.amount > 0
       })}
     >
-      <div className={s.checkbox}>
-        <input
-          type="checkbox"
-          checked={isSelected}
-          onChange={(event) => onSelection(event.target.checked)}
-        />
-      </div>
+      <input
+        className={s.checkbox}
+        type="checkbox"
+        checked={isSelected}
+        onChange={(event) => onSelection(event.target.checked)}
+      />
 
       <div>
         <div>{datetime.format('D MMM. YYYY')}</div>
@@ -55,8 +55,13 @@ export function StatementRow(props: StatementRowProps) {
       </div>
 
       <div className={s.numbers}>
-        <div className={s.amount}>{(statement.amount / 100).toFixed(2)}</div>
-        <div className={s.balance}>{(statement.balance / 100).toFixed(2)}</div>
+        <div className={s.amount}>
+          {(statement.amount / 100).toLocaleString('uk')}
+        </div>
+        <div className={s.balance}>
+          {CurrenciesKit[statement.currencyCode].symbol}
+          {(statement.balance / 100).toLocaleString('uk')}
+        </div>
       </div>
     </Card>
   );

@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from 'react-query';
 
-import { StatementItem } from '../apiTypes';
+import { StatementItem } from '../api/types';
 
 import { MonthAndYearRange } from '../components/MonthAndYearPicker/MonthAndYearPicker';
 

@@ -1,21 +1,4 @@
-export enum AccountType {
-  Black = 'black',
-  White = 'white',
-  Platinum = 'platinum',
-  Iron = 'iron',
-  Fop = 'fop',
-  Yellow = 'yellow'
-}
-
-export enum CashbackType {
-  None = 'None',
-  UAH = 'UAH',
-  Miles = 'Miles'
-}
-
-export enum CurrencyCode {
-  UAH = 980
-}
+import { AccountType, CashbackType, CurrencyCode } from './enums';
 
 export interface UserInfo {
   id: string;
@@ -26,7 +9,7 @@ export interface UserInfo {
     balance: number;
     creditLimit: number;
     type: AccountType;
-    currencyCode: number;
+    currencyCode: CurrencyCode;
     cashbackType: CashbackType;
     maskedPan: string[];
     iban: string;

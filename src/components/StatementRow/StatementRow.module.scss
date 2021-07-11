@@ -2,7 +2,7 @@
   display: grid;
 
   grid-template-columns: min-content 1fr 3fr 1fr;
-  grid-gap: 0.5em;
+  grid-gap: 1em;
 
   align-items: center;
 
@@ -15,7 +15,10 @@
 }
 
 .checkbox {
-  padding: 0 0.5em;
+  display: block;
+
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .numbers {
@@ -31,7 +34,7 @@
 
   .root._income & {
     font-weight: bold;
-    color: green;
+    color: lightgreen;
   }
 }
 

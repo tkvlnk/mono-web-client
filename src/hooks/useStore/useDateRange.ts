@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { MonthAndYearRange } from '../components/MonthAndYearPicker/MonthAndYearPicker';
+import { MonthAndYearRange } from '../../components/MonthAndYearPicker/MonthAndYearPicker';
 
 const DATE_RANGE_STORE_ITEM = 'date-range' as const;
 
