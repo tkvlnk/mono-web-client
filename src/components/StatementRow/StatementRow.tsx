@@ -6,7 +6,7 @@ import React from 'react';
 import { CurrenciesKit } from '../../api/CurrenciesKit';
 import { StatementItem } from '../../api/types';
 
-import findVisualsByMcc from '../../mccData/findVisualsByMcc';
+import { findVisualsByMcc } from '../../mccData/findVisualsByMcc';
 
 import { Card } from '../Card/Card';
 

@@ -5,7 +5,10 @@ export interface MonthPickerProps {
   onChange: (value: number) => void;
 }
 
-const MonthPicker: React.FC<MonthPickerProps> = ({ value, onChange }) => {
+export const MonthPicker: React.FC<MonthPickerProps> = ({
+  value,
+  onChange
+}) => {
   return (
     <select
       value={value.toString()}
@@ -32,5 +35,3 @@ const MonthPicker: React.FC<MonthPickerProps> = ({ value, onChange }) => {
     </select>
   );
 };
-
-export default MonthPicker;

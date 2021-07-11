@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 
 import { MonthAndYear } from '../../services/StatementsDataLayer';
 
-import MonthPicker from './MonthPicker';
+import { MonthPicker } from './MonthPicker';
 
 import s from './OneMonthAndYearPicker.module.scss';
-import YearPicker from './YearPicker';
+import { YearPicker } from './YearPicker';
 
 export interface OneMonthPickerProps {
   value: MonthAndYear;

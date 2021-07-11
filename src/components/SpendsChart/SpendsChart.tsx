@@ -5,7 +5,7 @@ import { Pie, PieChart } from 'recharts';
 import { StatementItem } from '../../api/types';
 import { useStatementsList } from '../../hooks/useStatementsList';
 import { useStore } from '../../hooks/useStore/useStore';
-import findVisualsByMcc, { MccVisuals } from '../../mccData/findVisualsByMcc';
+import { MccVisuals, findVisualsByMcc } from '../../mccData/findVisualsByMcc';
 
 export const SpendsChart = () => {
   const { dateRange, isStatementBlacklisted, blackListedStatementsCount } =

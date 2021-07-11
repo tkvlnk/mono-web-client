@@ -7,8 +7,6 @@ export interface MccRangeData {
   emoji: string;
 }
 
-export default function findDataInRangesByMcc(
-  code: number
-): MccRangeData | undefined {
+export function findDataInRangesByMcc(code: number): MccRangeData | undefined {
   return mccRanges.find(({ max }) => max >= code);
 }

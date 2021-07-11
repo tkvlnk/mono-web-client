@@ -1,12 +1,12 @@
-import findDataInGroupsByMcc from './findDataInGroupsByMcc';
-import findDataInRangesByMcc from './findDataInRangesByMcc';
+import { findDataInGroupsByMcc } from './findDataInGroupsByMcc';
+import { findDataInRangesByMcc } from './findDataInRangesByMcc';
 
 export interface MccVisuals {
   label: string;
   emoji: string;
 }
 
-export default function findVisualsByMcc(code: number): MccVisuals {
+export function findVisualsByMcc(code: number): MccVisuals {
   const group = findDataInGroupsByMcc(code);
 
   if (group) {

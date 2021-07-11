@@ -5,7 +5,7 @@ export interface YearPickerProps {
   onChange: (value: number) => void;
 }
 
-const YearPicker: React.FC<YearPickerProps> = ({ value, onChange }) => {
+export const YearPicker: React.FC<YearPickerProps> = ({ value, onChange }) => {
   const [years] = useState(() => {
     const result: number[] = [];
 
@@ -29,5 +29,3 @@ const YearPicker: React.FC<YearPickerProps> = ({ value, onChange }) => {
     </select>
   );
 };
-
-export default YearPicker;
