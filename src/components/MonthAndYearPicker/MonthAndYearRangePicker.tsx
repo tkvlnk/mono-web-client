@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Month } from '../../services/StatementsDataLayer';
+import { Month } from '../../services/StatementsService';
 
 import type { MonthAndYearRange } from './MonthAndYearPicker';
 import s from './MonthAndYearRangePicker.module.scss';

@@ -1,11 +1,17 @@
-# The following redirect is intended for use with most SPAs that handle
-# routing internally.
+[[redirects]]
+  from = "/api/mcc-list"
+  to = "https://raw.githubusercontent.com/Oleksios/Merchant-Category-Codes/main/With%20groups/mcc.json"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/api/*"
   to = "https://api.monobank.ua/:splat"
   status = 200
   force = true
 
+# The following redirect is intended for use with most SPAs that handle
+# routing internally.
 [[redirects]]
   from = "/*"
   to = "/index.html"

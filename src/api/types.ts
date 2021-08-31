@@ -33,3 +33,25 @@ export interface StatementItem {
   counterEdrpou: string;
   counterIban: string;
 }
+
+export interface MccInfo {
+  mcc: string;
+  group: {
+    type: 'AS';
+    description: {
+      uk: string;
+      en: string;
+      ru: string;
+    };
+  };
+  fullDescription: {
+    uk: string;
+    en: string;
+    ru: string;
+  };
+  shortDescription: {
+    uk: string;
+    en: string;
+    ru: string;
+  };
+}

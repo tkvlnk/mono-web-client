@@ -1,15 +1,21 @@
 import { UseQueryResult, useQuery } from 'react-query';
 
+import { Api } from '../api/Api';
 import { StatementItem } from '../api/types';
 
 import { MonthAndYearRange } from '../components/MonthAndYearPicker/MonthAndYearPicker';
 
-import { useStatementsDataLayer } from './useStatementsDataLayer';
+import { StatementsService } from '../services/StatementsService';
+
+import { useBackCardInfo } from './useBackCardInfo';
+import { useHttp } from './useHttp';
 
 export function useStatementsList(
   monthYear: MonthAndYearRange
 ): UseQueryResult<StatementItem[]> {
-  const statementsDataLayer = useStatementsDataLayer();
+  const http = useHttp();
+
+  const account = useBackCardInfo();
 
   return useQuery<StatementItem[]>(
     [
@@ -17,13 +23,18 @@ export function useStatementsList(
       monthYear.start.year,
       monthYear.start.month,
       monthYear.end?.year,
-      monthYear.end?.month
+      monthYear.end?.month,
+      account?.id
     ],
-    () => {
-      return statementsDataLayer.getStatements(monthYear.start, monthYear.end);
-    },
+    () =>
+      new StatementsService({
+        accountId: account!.id, // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        maxFetchRetries: 3,
+        api: new Api(http)
+      }).getStatements(monthYear.start, monthYear.end),
     {
-      retry: false
+      retry: false,
+      enabled: !!account?.id
     }
   );
 }

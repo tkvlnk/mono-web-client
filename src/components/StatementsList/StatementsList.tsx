@@ -28,7 +28,7 @@ export const StatementsList = () => {
             <StatementRow
               key={statement.id}
               statement={statement}
-              isSelected={!isStatementBlacklisted(statement.id)}
+              isSelected={!isStatementBlacklisted(statement)}
               onSelection={(isSelected) => {
                 if (!isSelected) {
                   addStatementToBlacklist(statement.id);

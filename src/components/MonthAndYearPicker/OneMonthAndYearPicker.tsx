@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { MonthAndYear } from '../../services/StatementsDataLayer';
+import { MonthAndYear } from '../../services/StatementsService';
 
 import { MonthPicker } from './MonthPicker';
 

@@ -18,7 +18,7 @@ export const UserAccounts = (props: UserInfoProps) => {
 
       <label className={s.accountsMenu}>
         <span>Cчета:</span>
-        <select value={selectedAccountId}>
+        <select value={selectedAccountId} onChange={() => {}}>
           {userInfo.accounts.map((acc) => (
             <option key={acc.id} value={acc.id}>{`${
               CurrenciesKit[acc.currencyCode].bankCode

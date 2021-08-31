@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { MonthAndYear } from '../../services/StatementsDataLayer';
+import { MonthAndYear } from '../../services/StatementsService';
 
 import { Card } from '../Card/Card';
 

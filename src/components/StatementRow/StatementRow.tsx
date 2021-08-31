@@ -6,8 +6,8 @@ import React from 'react';
 import { CurrenciesKit } from '../../api/CurrenciesKit';
 import { StatementItem } from '../../api/types';
 
-import { findVisualsByMcc } from '../../mccData/findVisualsByMcc';
-
+import { useMccList } from '../../hooks/useMccList';
+import { findVisualsByMccV2 } from '../../mccData/findVisualsByMccV2';
 import { Card } from '../Card/Card';
 
 import s from './StatementRow.module.scss';
@@ -16,16 +16,21 @@ interface StatementRowProps {
   statement: StatementItem;
   onSelection: (isSelected: boolean) => void;
   isSelected?: boolean;
+  selectionDisabled?: boolean;
 }
 
 export function StatementRow(props: StatementRowProps) {
-  const { statement, onSelection, isSelected } = props;
+  const { statement, onSelection, isSelected, selectionDisabled } = props;
 
   const timestamp = statement.time * 1000;
 
   const datetime = dayjs(timestamp).locale(dayJsLocale);
 
-  const mccVisuals = findVisualsByMcc(statement.mcc);
+  const mccVisuals = findVisualsByMccV2(statement.mcc);
+
+  const mccInfo = useMccList().data?.find(
+    ({ mcc }) => mcc === statement.mcc.toString()
+  )?.shortDescription.ru;
 
   return (
     <Card
@@ -35,6 +40,7 @@ export function StatementRow(props: StatementRowProps) {
       })}
     >
       <input
+        disabled={selectionDisabled}
         className={s.checkbox}
         type="checkbox"
         checked={isSelected}
@@ -49,7 +55,7 @@ export function StatementRow(props: StatementRowProps) {
       <div className={s.info}>
         <div className={s.emoji}>{mccVisuals.emoji} </div>
         <div>
-          <div className={s.label}>{mccVisuals.label}</div>
+          <div className={s.label}>{mccInfo ?? mccVisuals.label}</div>
           <div className={s.comment}>{statement.description}</div>
         </div>
       </div>
@@ -68,5 +74,6 @@ export function StatementRow(props: StatementRowProps) {
 }
 
 StatementRow.defaultProps = {
-  isSelected: false
+  isSelected: false,
+  selectionDisabled: false
 };

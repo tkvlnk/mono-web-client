@@ -5,11 +5,17 @@ import { Pie, PieChart } from 'recharts';
 import { StatementItem } from '../../api/types';
 import { useStatementsList } from '../../hooks/useStatementsList';
 import { useStore } from '../../hooks/useStore/useStore';
-import { MccVisuals, findVisualsByMcc } from '../../mccData/findVisualsByMcc';
+import { MccVisuals } from '../../mccData/findVisualsByMcc';
+import { findVisualsByMccV2 } from '../../mccData/findVisualsByMccV2';
+import { IgnoreCurrencyOperationsToggle } from '../IgnoreCurrencyOperationsToggle/IgnoreCurrencyOperationsToggle';
 
 export const SpendsChart = () => {
-  const { dateRange, isStatementBlacklisted, blackListedStatementsCount } =
-    useStore();
+  const {
+    dateRange,
+    isStatementBlacklisted,
+    blackListedStatementsCount,
+    ignoreCurrencyOperations
+  } = useStore();
 
   const { data: statements } = useStatementsList(dateRange);
 
@@ -25,11 +31,11 @@ export const SpendsChart = () => {
     }
 
     const statementsByCategories = statements?.reduce((result, statement) => {
-      if (isStatementBlacklisted(statement.id)) {
+      if (isStatementBlacklisted(statement)) {
         return result;
       }
 
-      const categoryData = findVisualsByMcc(statement.mcc);
+      const categoryData = findVisualsByMccV2(statement.mcc);
 
       if (!result[categoryData.label]) {
         result[categoryData.label] = {
@@ -65,11 +71,14 @@ export const SpendsChart = () => {
       totalSpent: distribution.reduce((result, { value }) => result + value, 0)
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statements, blackListedStatementsCount]);
+  }, [statements, blackListedStatementsCount, ignoreCurrencyOperations]);
 
   return (
     <div>
       <div>Общие траты: {data.totalSpent.toFixed(2)}</div>
+
+      <IgnoreCurrencyOperationsToggle />
+
       <PieChart width={400} height={400}>
         <Pie
           data={data.distribution}

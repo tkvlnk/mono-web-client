@@ -1,5 +1,4 @@
-import { AxiosInstance } from 'axios';
-
+import { Api } from '../api/Api';
 import { StatementItem } from '../api/types';
 
 export enum Month {
@@ -22,19 +21,18 @@ export interface MonthAndYear {
   year: number;
 }
 
-export interface StatementsDataLayerDeps {
-  axios: AxiosInstance;
+export interface StatementsServiceProps {
+  api: Api;
   storeNamespace?: string;
   accountId: string;
-  apiToken: string;
   maxFetchRetries: number;
 }
 
-export class StatementsDataLayer {
-  constructor(private readonly deps: StatementsDataLayerDeps) {}
+export class StatementsService {
+  constructor(private readonly props: StatementsServiceProps) {}
 
   private getCacheKey(monthAndYear: MonthAndYear): string {
-    return `statements-${this.deps.storeNamespace}-${monthAndYear.year}-${monthAndYear.month}`;
+    return `statements-${this.props.storeNamespace}-${monthAndYear.year}-${monthAndYear.month}`;
   }
 
   private setToCache(monthAndYear: MonthAndYear, data: StatementItem[]): void {
@@ -65,7 +63,7 @@ export class StatementsDataLayer {
 
     const fetchedData = await this.fetchStatementsWithRetries(
       monthAndYear,
-      this.deps.maxFetchRetries
+      this.props.maxFetchRetries
     );
 
     this.setToCache(monthAndYear, fetchedData);
@@ -87,7 +85,7 @@ export class StatementsDataLayer {
       return await promise;
     } catch {
       const retryDelay =
-        1.4 ** (this.deps.maxFetchRetries - retries) * 1000 - 1000;
+        1.4 ** (this.props.maxFetchRetries - retries) * 1000 - 1000;
 
       await new Promise((resolve) => setTimeout(resolve, retryDelay));
 
@@ -108,20 +106,11 @@ export class StatementsDataLayer {
       59
     );
 
-    const getSeconds = (date: Date) => Math.trunc(date.getTime() / 1000);
-
-    return this.deps.axios
-      .get<StatementItem[]>(
-        `/personal/statement/${this.deps.accountId}/${getSeconds(
-          fromDate
-        )}/${getSeconds(toDate)}`,
-        {
-          headers: {
-            'X-Token': this.deps.apiToken
-          }
-        }
-      )
-      .then((res) => res.data);
+    return this.props.api.fetchStatements({
+      fromDate,
+      toDate,
+      accountId: this.props.accountId
+    });
   }
 
   async getStatements(
