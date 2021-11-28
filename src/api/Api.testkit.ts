@@ -12,17 +12,15 @@ export interface TestKitMethod<M extends AnyFunction> {
   };
 }
 
-export type TestKit<A> = {
-  [K in keyof A]: A[K] extends AnyFunction ? TestKitMethod<A[K]> : never;
+export type TestKit<Service, OmittedKeys extends keyof Service = never> = {
+  [K in keyof Omit<Service, OmittedKeys>]: Service[K] extends AnyFunction ? TestKitMethod<Service[K]> : never;
 };
 
-export class ApiTestkit implements TestKit<Api> {
-  constructor(private baseUrl: string) {}
-
+export class ApiTestkit implements TestKit<Api, 'updateAuthToken'> {
   fetchUser: TestKitMethod<Api['fetchUser']> = {
     when: () => ({
       reply: (userInfo) => {
-        fetchMock.get(`${this.baseUrl}/api/personal/client-info`, {
+        fetchMock.get(`/api/personal/client-info`, {
           body: userInfo
         });
       }
@@ -32,7 +30,7 @@ export class ApiTestkit implements TestKit<Api> {
   fetchMccInfo: TestKitMethod<Api['fetchMccInfo']> = {
     when: () => ({
       reply: (mccList) => {
-        fetchMock.get(`${this.baseUrl}/api/mcc-list`, {
+        fetchMock.get(`/api/mcc-list`, {
           body: mccList
         });
       }
@@ -45,7 +43,7 @@ export class ApiTestkit implements TestKit<Api> {
         const getSeconds = (date: Date) => Math.trunc(date.getTime() / 1000);
 
         fetchMock.get(
-          `${this.baseUrl}/api/personal/statement/${accountId}/${getSeconds(
+          `/api/personal/statement/${accountId}/${getSeconds(
             fromDate
           )}/${getSeconds(toDate)}`,
           {

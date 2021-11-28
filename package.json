@@ -20,6 +20,7 @@
     "dayjs": "^1.10.5",
     "fetch-mock": "^9.11.0",
     "idb": "^6.1.2",
+    "nested-builder": "^1.1.1",
     "node-fetch": "^2.6.0",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",

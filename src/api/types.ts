@@ -34,24 +34,18 @@ export interface StatementItem {
   counterIban: string;
 }
 
+export interface MccInfoDescription {
+  uk: string;
+  en: string;
+  ru: string;
+}
+
 export interface MccInfo {
   mcc: string;
   group: {
-    type: 'AS';
-    description: {
-      uk: string;
-      en: string;
-      ru: string;
-    };
+    type: string;
+    description: MccInfoDescription;
   };
-  fullDescription: {
-    uk: string;
-    en: string;
-    ru: string;
-  };
-  shortDescription: {
-    uk: string;
-    en: string;
-    ru: string;
-  };
+  fullDescription: MccInfoDescription;
+  shortDescription: MccInfoDescription;
 }
