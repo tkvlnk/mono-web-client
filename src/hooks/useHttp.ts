@@ -10,7 +10,6 @@ export const [HttpProvider, useHttp] = constante(() => {
   return useMemo(
     () =>
       axios.create({
-        baseURL: '/api',
         headers: {
           'Content-Types': 'application/json'
         },

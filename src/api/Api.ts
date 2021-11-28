@@ -1,9 +1,20 @@
-import { AxiosInstance } from 'axios';
-
 import { MccInfo, StatementItem, UserInfo } from './types';
 
 export class Api {
-  constructor(private readonly axios: AxiosInstance) {}
+  constructor(private authToken: string) {}
+
+  updateAuthToken(newToken: string): void {
+    this.authToken = newToken;
+  }
+
+  private get requestInit(): RequestInit {
+    return {
+      headers: {
+        'Content-Types': 'application/json',
+        'X-Token': this.authToken
+      }
+    };
+  }
 
   fetchStatements({
     accountId,
@@ -16,22 +27,23 @@ export class Api {
   }): Promise<StatementItem[]> {
     const getSeconds = (date: Date) => Math.trunc(date.getTime() / 1000);
 
-    return this.axios
-      .get<StatementItem[]>(
-        `/personal/statement/${accountId}/${getSeconds(fromDate)}/${getSeconds(
-          toDate
-        )}`
-      )
-      .then((res) => res.data);
+    return fetch(
+      `/api/personal/statement/${accountId}/${getSeconds(
+        fromDate
+      )}/${getSeconds(toDate)}`,
+      this.requestInit
+    ).then((res) => res.json()) as Promise<StatementItem[]>;
   }
 
   fetchUser(): Promise<UserInfo> {
-    return this.axios
-      .get<UserInfo>('/personal/client-info')
-      .then((res) => res.data);
+    return fetch('/api/personal/client-info', this.requestInit).then((res) =>
+      res.json()
+    ) as Promise<UserInfo>;
   }
 
   fetchMccInfo(): Promise<MccInfo[]> {
-    return this.axios.get<MccInfo[]>('/mcc-list').then((res) => res.data);
+    return fetch('/api/mcc-list', this.requestInit).then((res) =>
+      res.json()
+    ) as Promise<MccInfo[]>;
   }
 }
