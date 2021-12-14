@@ -13,4 +13,5 @@ const promises = Object.values(mccGroups).map(({ image: { url, name } }) => {
   });
 });
 
+// eslint-disable-next-line no-console
 void Promise.all(promises).then(() => console.log('all done'));

@@ -5,7 +5,7 @@ import './index.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { App } from './components/App/App';
-import { HttpProvider } from './hooks/useHttp';
+import { ApiProvider } from './hooks/useApi';
 import { StoreProvider } from './hooks/useStore/useStore';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
@@ -13,13 +13,13 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <HttpProvider>
+  <ApiProvider>
     <QueryClientProvider client={queryClient}>
       <StoreProvider>
         <App />
       </StoreProvider>
     </QueryClientProvider>
-  </HttpProvider>,
+  </ApiProvider>,
   document.getElementById('root')
 );
 

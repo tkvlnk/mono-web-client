@@ -9,10 +9,10 @@ import {
 
 export type Store = DateRange & ApiToken & StatementsIdBlacklist;
 
-export const [StoreProvider, useStore] = constante((): Store => {
-  return {
+export const [StoreProvider, useStore] = constante(
+  (): Store => ({
     ...useDateRange(),
     ...useApiToken(),
     ...useStatementsBlacklist()
-  };
-});
+  })
+);

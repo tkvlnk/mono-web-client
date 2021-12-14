@@ -8,30 +8,28 @@ export interface MonthPickerProps {
 export const MonthPicker: React.FC<MonthPickerProps> = ({
   value,
   onChange
-}) => {
-  return (
-    <select
-      value={value.toString()}
-      onChange={(event) => onChange(Number(event.target.value))}
-    >
-      {[
-        'Январь',
-        'Февраль',
-        'Март',
-        'Апрель',
-        'Май',
-        'Июнь',
-        'Июль',
-        'Август',
-        'Сентябрь',
-        'Октябрь',
-        'Ноябрь',
-        'Декабрь'
-      ].map((monthName, index) => (
-        <option key={monthName} value={index.toString()}>
-          {monthName}
-        </option>
-      ))}
-    </select>
-  );
-};
+}) => (
+  <select
+    value={value.toString()}
+    onChange={(event) => onChange(Number(event.target.value))}
+  >
+    {[
+      'Январь',
+      'Февраль',
+      'Март',
+      'Апрель',
+      'Май',
+      'Июнь',
+      'Июль',
+      'Август',
+      'Сентябрь',
+      'Октябрь',
+      'Ноябрь',
+      'Декабрь'
+    ].map((monthName, index) => (
+      <option key={monthName} value={index.toString()}>
+        {monthName}
+      </option>
+    ))}
+  </select>
+);

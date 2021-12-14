@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint/naming-convention': 0,
     'no-void': [2, { allowAsStatement: true }],
     'import/prefer-default-export': 0,
-    'import/no-default-export': 2
+    'import/no-default-export': 2,
+    '@typescript-eslint/explicit-module-boundary-types': 0
   }
 };

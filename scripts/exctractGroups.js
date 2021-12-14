@@ -33,4 +33,5 @@ const groups = [
 
 const json = JSON.stringify(groups, null, 4);
 
+// eslint-disable-next-line no-console
 console.log(json);

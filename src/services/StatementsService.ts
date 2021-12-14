@@ -87,7 +87,9 @@ export class StatementsService {
       const retryDelay =
         1.4 ** (this.props.maxFetchRetries - retries) * 1000 - 1000;
 
-      await new Promise((resolve) => setTimeout(resolve, retryDelay));
+      await new Promise((resolve) => {
+        setTimeout(resolve, retryDelay);
+      });
 
       return this.fetchStatementsWithRetries(monthAndYear, retries - 1);
     }
