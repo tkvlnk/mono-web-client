@@ -4,6 +4,10 @@ import { useStore } from '../../hooks/useStore/useStore';
 
 import s from './ApiToken.module.scss';
 
+export const TestId = {
+  Input: () => 'api-token-input'
+} as const;
+
 export const ApiToken = () => {
   const { apiToken, setApiToken } = useStore();
 
@@ -12,6 +16,7 @@ export const ApiToken = () => {
       <label className={s.field}>
         <span>API токен:</span>
         <input
+          data-testid={TestId.Input()}
           type="text"
           value={apiToken}
           onChange={(event) => setApiToken(event.target.value)}

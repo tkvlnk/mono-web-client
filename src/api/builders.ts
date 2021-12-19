@@ -6,7 +6,9 @@ import { MccInfo, StatementItem, UserInfo } from './types';
 
 const chance = new Chance();
 
-const UserAccountBuilder = createBuilderClass<UserInfo['accounts'][number]>()({
+export const UserAccountBuilder = createBuilderClass<
+  UserInfo['accounts'][number]
+>()({
   id: {
     generator: () => chance.guid()
   },
